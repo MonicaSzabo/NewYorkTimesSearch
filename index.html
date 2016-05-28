@@ -14,6 +14,7 @@
  }
  .well {
    margin-top: 10px;
+   padding: 0;
 
  }
 
@@ -30,6 +31,7 @@
  .panelHeaders{
    background-color: #345;
    color: white;
+   padding: 13px 2%;
  }
 
  </style>
@@ -73,20 +75,28 @@
    </div>
  </body>
 
- <script type="text/javascript">
- 	var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=b9f91d369ff59547cd47b931d8cbc56b:0:74623931&q=user-input;"
-    $.ajax({url: queryURL, method: 'GET'})
-    .done(function(response) {
-    console.log(response)
+<script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
+<script type="text/javascript">
 
-    $('#searchButton').on('click', function() {
-        var user-input = $('input-textbox').val().trim();
+	$('#searchButton').on('click', function() {
+        var userInput = $('#searchTerm').val().trim();
+ 		var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=b9f91d369ff59547cd47b931d8cbc56b:0:74623931&q=" + userInput;
 
-        $('#searchTerm').
-        $('.form-group').
+ 		console.log(userInput);
+        //$('#searchTerm').
+        //$('.form-group').
+        $.ajax({
+        	url: queryURL,
+        	method: 'GET'
+        })
+		.done(function(response) {
+	    	alert("Hello!!");
+	    	$('#topArticles').append(JSON.stringify(response));
+	    	console.log(response);
 
-}
+		});
+		return false;
+	});
 
- 	
- </script>
+</script>
 </html>
